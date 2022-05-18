@@ -14,5 +14,8 @@ router.route('/:id')
     .patch(updatePolicy)
     .delete(deletePolicy);
 
+router.route('/:id/:clientName')
+    .delete(deletePolicy);
+
 
 module.exports = router

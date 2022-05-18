@@ -44,6 +44,7 @@ const updateClient = async (req, res) => {
   const updateClient = await Client.findByIdAndUpdate(req.params.id, req.body)
 
   res.send(updateClient)
+  
 }
 
 const deleteClient = async (req, res) => {
