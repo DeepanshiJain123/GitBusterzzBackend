@@ -23,17 +23,15 @@ const getOnePolicy = async (req, res) => {
 
 const createPolicy = async (req, res) => {
   var newId = new mongoose.mongo.ObjectId();
-  req.body._id=newId;
+  req.body._id = newId;
 
   console.log(req.body);
 
   const newPolicy = await Policy.create(req.body)
-  const client = await Client.findOne({"name":req.body.ClientName})
-  client.policies.push(newPolicy);
-  console.log("Client Updated Details");
-  const finalUpdatedClient = await Client.updateOne({"name":req.body.ClientName},client);
-  console.log("Client Details"+client);
-  console.log(finalUpdatedClient);
+  const client = await Client.findOne({ "name": req.body.ClientName })
+  console.log(client, newPolicy)
+  client.addPolicy(newPolicy)
+  await client.save()
   res.send(newPolicy)
 }
 

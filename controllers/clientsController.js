@@ -10,7 +10,7 @@ const getAllClient = async (req, res) => {
 
   const allClients = await Client.find().populate({
     path: 'policies',
-    select: 'PolicyName Premium'
+    select: 'PolicyName Premium ClientName Age Residance Dependants Description'
   })
 
   res.send(allClients)
@@ -44,7 +44,6 @@ const updateClient = async (req, res) => {
   const updateClient = await Client.findByIdAndUpdate(req.params.id, req.body)
 
   res.send(updateClient)
-  
 }
 
 const deleteClient = async (req, res) => {
