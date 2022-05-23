@@ -16,4 +16,7 @@ router.route("/:id")
      .delete(deleteEmployee)
      .get(getOneEmployee)
 
+router.route('/:id/:empCompany')
+     .delete(deleteEmployee);
+
 module.exports = router

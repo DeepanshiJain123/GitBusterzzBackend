@@ -9,8 +9,6 @@ const policySchema = mongoose.Schema({
     },
     Age: {
         type: Number,
-        enum: [1, 2, 3],
-        default: 0
     },
     Residance: {
         type: String,

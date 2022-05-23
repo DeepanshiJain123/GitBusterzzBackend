@@ -28,7 +28,7 @@ const createClient = async (req, res) => {
   //   "name" : req.body.clientName
   // });
   const newClientObject = await Client.create(req.body);
-
+  
   res.send(newClientObject)
 }
 

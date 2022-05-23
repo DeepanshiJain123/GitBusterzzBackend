@@ -1,4 +1,5 @@
 const { Organization } = require("../models/organizationModel")
+var mongoose = require("mongoose");
 
 const checkID = (req, res, next, val) => {
   console.log(`Organisation id is: ${val}`);
@@ -10,7 +11,7 @@ const getOrganizations = async (req, res) => {
   // database me se get all the organizations & return back in json
   const allOrganizations = await Organization.find().populate({
                               path: 'employees',
-                              select: 'empName empMobile'
+                              select: 'empName empMobile empAge empSalary empAddress empCompany empMail empAdhar'
                             })
 
   res.send(allOrganizations)
@@ -23,6 +24,9 @@ const getOneOrganization = async (req, res) => {
 }
 
 const createOrganization = async (req, res) => {
+
+  var newId = new mongoose.mongo.ObjectId();
+  req.body._id = newId;
 
   const newOrganization = await Organization.create(req.body)
 
@@ -46,11 +50,13 @@ const deleteOrganization = async (req, res) => {
 
 
 
+
 module.exports = {
   checkID,
   getOrganizations,
   createOrganization,
   updateOrganization,
   getOneOrganization,
-  deleteOrganization
+  deleteOrganization,
+  
 }

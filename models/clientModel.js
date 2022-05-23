@@ -16,6 +16,16 @@ const clientSchema = mongoose.Schema({
 
 })
 
+clientSchema.methods.addPolicy = async function(policy){
+   if(this.policies) {
+    this.policies = [policy, ...this.policies]
+   } else {
+       this.policies = [policy]
+   }
+   
+    
+}
+
 const Client = mongoose.model('Client', clientSchema)
 
 module.exports = { Client }

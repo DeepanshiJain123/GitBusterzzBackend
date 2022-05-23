@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 
 const employeeSchema = mongoose.Schema({
     empName: { type: String },
-    empId: { type: Number },
     empMobile: { type: Number},
     empPolicyId: { type: Number },
     empAge: { type: Number },
@@ -12,8 +11,25 @@ const employeeSchema = mongoose.Schema({
     tpid:{ type:Number },
     empPswd:{ type:Number },
     empPhoto:{ type:String },
-    empMail:{ type:String }
+    empMail:{ type:String },
+    empAdhar: { type: Number },
+    clients: [
+        { 
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Client'
+        }
+    ]
 })
+
+employeeSchema.methods.addClient = async function(client){
+    if(this.clients) {
+     this.clients = [client, ...this.clients]
+    } else {
+        this.clients = [client]
+    }
+    
+     
+ }
 
 const Employee = mongoose.model('Employee', employeeSchema)
 
